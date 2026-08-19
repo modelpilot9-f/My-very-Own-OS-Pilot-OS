@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web Operating System</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            background: url("./wp3191907-transformers-wallpaper-1920x1080.jpg") center / cover;
+            font-family: Arial, sans-serif;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        #topbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            color: white;
+            background: rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+
+        #desktopApps {
+            position: fixed;
+            top: 80px;
+            left: 16px;
+            z-index: 1;
+        }
+
+        .desktop-icon {
+            width: 96px;
+            padding: 8px;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+            user-select: none;
+            filter: drop-shadow(0 0 8px black);
+        }
+
+        .desktop-icon img {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .app-window {
+            position: fixed;
+            color: white;
+            background: rgba(20, 20, 30, 0.95);
+            border: 1px solid rgb(125, 255, 212);
+            border-radius: 10px;
+            box-shadow: 0 0 20px black;
+            z-index: 20;
+        }
+        #app-window {
+             top: 220px;
+             left: 420px;
+            width: 360px;
+        }
+
+        #welcome-window {
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            transform: translate(-50%, -50%);
+        }
+
+        #ram-window {
+            top: 180px;
+            left: 260px;
+            width: 360px;
+        }
+
+        .window-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 14px;
+            color: rgb(125, 255, 212);
+            background: rgba(125, 255, 212, 0.2);
+            cursor: move;
+            user-select: none;
+        }
+
+        .close-button {
+            color: white;
+            background: transparent;
+            border: 0;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .window-content {
+            padding: 18px;
+            line-height: 1.5;
+        }
+        .explorer-toolbar {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .explorer-toolbar button {
+            padding: 6px 10px;
+            color: white;
+            background: rgba(125, 255, 212, 0.2);
+            border: 1px solid rgb(125, 255, 212);
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .explorer-items {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .explorer-item {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            align-items: center;
+            width: 80px;
+            padding: 8px;
+            color: white;
+            background: transparent;
+            border: 0;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .explorer-item:hover {
+            background: rgba(125, 255, 212, 0.2);
+        }
+
+        #explorer-window {
+            top: 150px;
+            left: 520px;
+            width: 440px;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div id="topbar">
+        <strong>PilotOS</strong>
+        <span>☀️ Always Goofing ☁️</span>
+        <span id="timeElement"></span>
+    </div>
+
+
+<div id="desktopApps">
+    <div id="ram-icon" class="desktop-icon">
+        <img src="./Ram.webp" alt="RAM">
+        <div>Ram</div>
+    </div>
+
+    <div id="app-icon" class="desktop-icon">
+        <div style="font-size: 56px;">👤</div>
+        <div>Abt me</div>
+    </div>
+        <div id="explorer-icon" class="desktop-icon">
+        <div style="font-size: 56px;">📁</div>
+        <div>Files</div>
+</div>
+</div>
+
+
+    <div id="welcome-window" class="app-window">
+        <div id="welcome-header" class="window-header">
+            <strong>PilotOS</strong>
+            <button id="welcome-close" class="close-button" type="button">&times;</button>
+        </div>
+        <div class="window-content">
+            This is a web operating system made by me. It is a work in progress and will be updated regularly.
+        </div>
+    </div>
+     <div id="app-window" class="app-window hidden">
+        <div id="app-header" class="window-header">
+            <strong>Abt me</strong>
+            <button id="app-close" class="close-button" type="button">&times;</button>
+        </div>
+        <div class="window-content">
+            <h2>About My Username</h2>
+            <p>Microsoft Gave this Random Username To me So I Just Based Everything On It.</p>
+            <p>While I Was Signing up for Xbox smth This Username happened......</p>
+        </div>
+    </div>
+
+    <div id="ram-window" class="app-window hidden">
+        <div id="ram-header" class="window-header">
+            <strong>RAM</strong>
+            <button id="ram-close" class="close-button" type="button">&times;</button>
+        </div>
+        <div class="window-content">
+            <h2>About RAM</h2>
+            <p>RAM means Random Access Memory. It temporarily stores data currently used by your computer and applications.</p>
+            <p>RAM is cleared when the computer is turned off.</p>
+        </div>
+    </div>
+<div id="explorer-window" class="app-window hidden">
+    <div id="explorer-header" class="window-header">
+        <strong>Files</strong>
+        <button id="explorer-close" class="close-button" type="button">&times;</button>
+    </div>
+
+    <div class="window-content">
+        <div class="explorer-toolbar">
+            <button id="explorer-back" type="button">← Back</button>
+            <strong id="explorer-path">Home</strong>
+        </div>
+
+        <div id="explorer-items" class="explorer-items">
+            <button class="explorer-item" data-folder="Documents">📂<span>Documents</span></button>
+            <button class="explorer-item" data-folder="Pictures">📂<span>Pictures</span></button>
+            <button class="explorer-item" data-file="Welcome.txt">📄<span>Welcome.txt</span></button>
+        </div>
+    </div>
+</div>
+
+
+    <script>
+        const timeElement = document.getElementById("timeElement");
+
+        function updateTime() {
+            timeElement.textContent = new Date().toLocaleString();
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+
+        const ramIcon = document.getElementById("ram-icon");
+        const ramWindow = document.getElementById("ram-window");
+        const ramClose = document.getElementById("ram-close");
+
+        ramIcon.addEventListener("dblclick", () => {
+            ramWindow.classList.remove("hidden");
+        });
+
+        ramClose.addEventListener("click", () => {
+            ramWindow.classList.add("hidden");
+        });
+
+        document.getElementById("welcome-close").addEventListener("click", () => {
+            document.getElementById("welcome-window").classList.add("hidden");
+        });
+
+        function makeDraggable(windowElement, headerElement) {
+            let dragging = false;
+            let offsetX = 0;
+            let offsetY = 0;
+
+            headerElement.addEventListener("mousedown", (event) => {
+                if (event.target.closest("button")) return;
+
+                dragging = true;
+                const rect = windowElement.getBoundingClientRect();
+                offsetX = event.clientX - rect.left;
+                offsetY = event.clientY - rect.top;
+            });
+
+            document.addEventListener("mousemove", (event) => {
+                if (!dragging) return;
+
+                windowElement.style.left = `${event.clientX - offsetX}px`;
+                windowElement.style.top = `${event.clientY - offsetY}px`;
+                windowElement.style.transform = "none";
+            });
+
+            document.addEventListener("mouseup", () => {
+                dragging = false;
+            });
+        }
+        makeDraggable(
+            document.getElementById("welcome-window"),
+            document.getElementById("welcome-header")
+        );
+
+        makeDraggable(
+            document.getElementById("app-window"),
+            document.getElementById("app-header")
+        );
+
+        makeDraggable(
+            document.getElementById("ram-window"),
+            document.getElementById("ram-header")
+        );
+
+        const appIcon = document.getElementById("app-icon");
+        const appWindow = document.getElementById("app-window");
+        const appClose = document.getElementById("app-close");
+
+        appIcon.addEventListener("dblclick", () => {
+            appWindow.classList.remove("hidden");
+        });
+
+        appClose.addEventListener("click", () => {
+            appWindow.classList.add("hidden");
+                });
+    const explorerIcon = document.getElementById("explorer-icon");
+    const explorerWindow = document.getElementById("explorer-window");
+    const explorerClose = document.getElementById("explorer-close");
+    const explorerBack = document.getElementById("explorer-back");
+    const explorerPath = document.getElementById("explorer-path");
+    const explorerItems = document.getElementById("explorer-items");
+
+    explorerIcon.addEventListener("dblclick", () => {
+        explorerWindow.classList.remove("hidden");
+        });
+
+        explorerClose.addEventListener("click", () => {
+            explorerWindow.classList.add("hidden");
+        });
+
+        explorerItems.addEventListener("click", (event) => {
+            const item = event.target.closest(".explorer-item");
+            if (!item) return;
+
+            const folder = item.dataset.folder;
+            const file = item.dataset.file;
+
+            if (folder) {
+                explorerPath.textContent = `Home / ${folder}`;
+                explorerItems.innerHTML = `
+                    <button class="explorer-item" data-file="Example.txt">
+                        📄<span>Example.txt</span>
+                    </button>
+                `;
+            }
+
+            if (file) {
+                explorerPath.textContent = file;
+                explorerItems.innerHTML = `
+                    <p>📄 This is the contents of ${file}.</p>
+                `;
+            }
+        });
+
+        explorerBack.addEventListener("click", () => {
+            explorerPath.textContent = "Home";
+            explorerItems.innerHTML = `
+                <button class="explorer-item" data-folder="Documents">📂<span>Documents</span></button>
+                <button class="explorer-item" data-folder="Pictures">📂<span>Pictures</span></button>
+                <button class="explorer-item" data-file="Welcome.txt">📄<span>Welcome.txt</span></button>
+            `;
+        });
+
+        makeDraggable(explorerWindow, document.getElementById("explorer-header"));
+
+     
+        
+    </script>
+</body>
+</html>
